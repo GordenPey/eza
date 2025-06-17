@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/eza/static/css/main.00102c1c.css",
-    "main.js": "/eza/static/js/main.efe2c15e.js",
+    "main.js": "/eza/static/js/main.fb18d0d5.js",
     "index.html": "/eza/index.html",
     "main.00102c1c.css.map": "/eza/static/css/main.00102c1c.css.map",
-    "main.efe2c15e.js.map": "/eza/static/js/main.efe2c15e.js.map"
+    "main.fb18d0d5.js.map": "/eza/static/js/main.fb18d0d5.js.map"
   },
   "entrypoints": [
     "static/css/main.00102c1c.css",
-    "static/js/main.efe2c15e.js"
+    "static/js/main.fb18d0d5.js"
   ]
 }
