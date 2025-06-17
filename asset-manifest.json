@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/eza/static/css/main.00102c1c.css",
+    "main.js": "/eza/static/js/main.9aba5610.js",
+    "index.html": "/eza/index.html",
+    "main.00102c1c.css.map": "/eza/static/css/main.00102c1c.css.map",
+    "main.9aba5610.js.map": "/eza/static/js/main.9aba5610.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.00102c1c.css",
+    "static/js/main.9aba5610.js"
+  ]
+}

@@ -1,0 +1,9 @@
+# .gitignore
+node_modules/
+node_modules/.cache/
+.cache/
+build/
+dist/
+.DS_Store
+.env
+*.log
