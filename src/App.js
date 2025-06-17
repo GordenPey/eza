@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 
 export default function ResumeWebsite() {
   const FAQItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
-
     return (
       <div
         onClick={() => setIsOpen(!isOpen)}
@@ -14,273 +13,413 @@ export default function ResumeWebsite() {
           {question}
           <span>{isOpen ? "−" : "+"}</span>
         </h3>
-        {isOpen && <p className="mt-2 text-gray-300">{answer}</p>}
+        {isOpen && <p className="mt-2 text-black">{answer}</p>}
       </div>
     );
   };
+
   const controls = useAnimation();
+
+  const cards = [
+    { imgSrc: "/testimonials/testi1.jpg", alt: "testimonial 1" },
+    { imgSrc: "/testimonials/testi2.jpg", alt: "testimonial 2" },
+    { imgSrc: "/testimonials/testi3.jpg", alt: "testimonial 3" },
+    { imgSrc: "/testimonials/testi4.jpg", alt: "testimonial 4" },
+    { imgSrc: "/testimonials/testi5.jpg", alt: "testimonial 5" },
+  ];
+
+  const cards1 = [
+    { imgSrc: "/resources/resource1.png", alt: "resource 1" },
+    { imgSrc: "/resources/resource2.png", alt: "resource 2" },
+    { imgSrc: "/resources/resource3.png", alt: "resource 3" },
+    { imgSrc: "/resources/resource4.png", alt: "resource 4" },
+    { imgSrc: "/resources/resource5.png", alt: "resource 5" },
+  ];
 
   useEffect(() => {
     controls.start({ opacity: 1, y: 0 });
   }, [controls]);
 
   return (
-    <div className="bg-black text-white min-h-screen font-sans scroll-smooth">
-      {/* Navigation */}
-      <header className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md p-4 flex items-center justify-between text-sm">
-        {/* Left placeholder (can be empty or used for something else) */}
-        <div className="w-1/3">PYJTuition</div>
+    <div className="relative text-white min-h-screen font-sans scroll-smooth">
+      <header className="fixed top-0 w-full z-50 backdrop-blur-md text-[#14034] p-4 flex items-center justify-between text-sm">
+        <a
+          href="#home"
+          className="w-1/3 text-blue-700 font-extrabold cursor-pointer"
+        >
+          EZATuition
+        </a>
 
-        {/* Center logo */}
-        <div className="w-1/3 flex justify-center">
-          <img
-            src="/pyj.png" // change path as needed
-            alt="PYJTuition Logo"
-            className="h-8 md:h-10 object-contain"
-          />
-        </div>
-
-        {/* Right nav */}
-        <nav className="w-1/3 flex justify-end space-x-4">
-          <a href="#about" className="hover:text-gray-400">
+        <nav className="w-1/3 flex justify-end space-x-4 items-center">
+          <a
+            href="#about"
+            className="text-blue-700 hover:text-blue-100 px-3 py-2 h-10 flex items-center"
+          >
             About
           </a>
-          <a href="#experience" className="hover:text-gray-400">
+          <a
+            href="#experience"
+            className="text-blue-700 hover:text-blue-100 px-3 py-2 h-10 flex items-center"
+          >
             Testimonials
           </a>
-          <a href="#resource" className="hover:text-gray-400">
+          <a
+            href="#resource"
+            className="text-blue-700 hover:text-blue-100 px-3 py-2 h-10 flex items-center"
+          >
             Resources
           </a>
-          <a href="#faq" className="hover:text-gray-400">
+          <a
+            href="#fees"
+            className="text-blue-700 hover:text-blue-100 px-3 py-2 h-10 flex items-center"
+          >
+            Fees
+          </a>
+          <a
+            href="#faq"
+            className="text-blue-700 hover:text-blue-100 px-3 py-2 h-10 flex items-center"
+          >
             FAQ
           </a>
-          <a href="#contact" className="hover:text-gray-400">
+          <a
+            href="#contact"
+            className="text-blue-700 hover:text-blue-100 px-3 py-2 h-10 flex items-center"
+          >
             Contact
           </a>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSf6K8KNlTXAPtp4Ax-_x8AToHITSPi1KLBung75Xlx6NNeGug/viewform?usp=header"
-            className="hover:text-gray-400 font-bold text-red-600"
+            className="px-5 py-2 h-10 rounded-full animated-gradient-bg text-white font-bold shadow-md hover:bg-blue-100 hover:text-blue-800 transition flex items-center"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Sign Up Here!
+            Enquire
           </a>
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section
-        className="h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left px-6 md:px-20 gap-4 md:gap-8"
+      <motion.section
+        className="relative h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left px-6 md:px-20 gap-4 md:gap-8 pt-20"
         id="home"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
       >
-        {/* Profile Image */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={controls}
-          transition={{ delay: 0.4, duration: 1 }}
-          className="w-40 h-40 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white shadow-lg md:mr-6"
-        >
-          <img
-            src="/my-photo.jpeg" // Make sure this path is correct
-            alt="Gorden's portrait"
+        {/* Background video with overlay */}
+        <div className="absolute top-0 left-0 w-full h-full z-[-1]">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-          />
-        </motion.div>
+          >
+            <source src="/books.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute top-0 left-0 w-full h-full bg-white/60" />
+        </div>
 
-        {/* Text Content */}
-        <div className="flex-1">
+        {/* Hero content */}
+
+        <div className="flex-1 text-center px-4">
           <motion.h1
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={controls}
             transition={{ duration: 1 }}
-            className="text-5xl md:text-7xl font-bold"
+            className="text-5xl md:text-6xl font-extrabold text-center text-blue-700 tracking-tight mb-5"
           >
-            Hi, I'm Gorden
+            Maths. Biology. Chemistry.
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={controls}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="mt-4 text-xl md:text-2xl text-gray-400"
+            transition={{ delay: 0.4, duration: 1 }}
+            className="text-3xl md:text-4xl font-extrabold text-center text-blue-900 tracking-tight mt-10 mb-5"
           >
-            Mathematics, Biology, Chemistry Tutor
+            <strong>O, A-Level & IB.</strong> We've got you.
           </motion.p>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={controls}
-            transition={{ delay: 1, duration: 1 }}
-            className="mt-4 text-xl md:text-2xl text-gray-400"
+            transition={{ delay: 0.8, duration: 1 }}
+            className="text-base md:text-lg mt-4 text-blue-500 mt-15 font-extrabold"
           >
-            Specialising in O/A-Level and IB levels.
+            Clear concepts. Smart strategies. Proven results.
           </motion.p>
-        </div>
-      </section>
 
-      {/* About Section */}
-      <section
-        className="py-32 px-6 md:px-32 bg-zinc-900 text-white"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={controls}
+            transition={{ delay: 1.2, duration: 0.5 }}
+            className="mt-8"
+          ></motion.div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        className="py-32 px-6 md:px-32 bg-gradient-to-b from-white via-blue-300 to-white"
         id="about"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8 }}
       >
-        <h2 className="text-4xl font-semibold mb-6">About Me</h2>
-        <p className="text-lg leading-relaxed text-gray-300">
-          I’ve been tutoring for over 7 years, specializing in Biology,
-          Chemistry, and Math at the O-Level, A-Level, and IB levels. My
-          approach focuses on building strong conceptual understanding and exam
-          readiness through clear explanations, targeted practice, and
-          personalized guidance. Many of my students have improved not just in
-          their grades, but also in their confidence and ability to tackle
-          challenging questions. Whether you’re aiming to catch up, solidify
-          foundations, or push for distinction, I’m here to help you achieve
-          your academic goals.
-        </p>
-
-        <p className="text-lg leading-relaxed text-gray-300 py-10">
-          I offer classes through a flexible hybrid model designed to
-          accommodate diverse learning preferences. Students can opt for live
-          online instruction via Zoom, conducted in small group settings of at
-          most five students per session for focused interaction. Alternatively,
-          personalized one-on-one in-person classes are available at your
-          residence for tailored support.
-        </p>
-      </section>
-
-      {/* Testimonials Section */}
-      <section
-        className="py-32 px-6 md:px-32 bg-black text-white"
-        id="experience"
-      >
-        <h2 className="text-4xl font-semibold mb-12">Student Testimonials</h2>
-        <div className="overflow-x-auto">
-          <div className="flex gap-6 w-max">
-            {/* Example testimonial image */}
-            <div className="min-w-[300px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="testi1.jpg"
-                alt="testimonial 1"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[300px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="testi2.jpg"
-                alt="testimonial 2"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[300px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="testi3.jpg"
-                alt="testimonial 3"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[300px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="testi4.jpg"
-                alt="testimonial 4"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[300px] h-auto border border-gray-700 rounded-lg overflow-hidden">
-              <img
-                src="testimonial5.jpg"
-                alt="Testimonial 5"
-                className="w-full h-auto object-contain"
-              />
-            </div>
-            <div className="min-w-[300px] h-auto border border-gray-700 rounded-lg overflow-hidden">
-              <img
-                src="testimonial6.jpg"
-                alt="Testimonial 6"
-                className="w-full h-auto object-contain"
-              />
-            </div>
-            {/* Add more images as needed */}
-          </div>
-        </div>
-      </section>
-
-      {/* Resource Library Section */}
-      <section
-        className="py-32 px-6 md:px-32 bg-zinc-900 text-white"
-        id="resource"
-      >
-        <h2 className="text-4xl font-semibold mb-12">Resource Library</h2>
-        <p className="text-lg leading-relaxed text-gray-300 py-10">
-          To support student success, I've established a robust academic
-          resource platform, including a Google Drive and a Telegram channel.
-          The Google Drive serves as a central repository for essential learning
-          materials, such as detailed class notes, practice homework with
-          solutions, and a curated archive of past year papers with
-          comprehensive solutions. Complementing this, the exclusive Telegram
-          channel actively addresses student needs by sharing insights on
-          commonly encountered questions and common errors, thereby proactively
-          guiding students to avoid pitfalls and deepen their understanding.
-        </p>
-
-        <p className="text-lg leading-relaxed text-gray-300 py-5">
-          To ensure all students feel comfortable participating, our Zoom
-          classes incorporate an interactive Poll Everywhere platform, enabling
-          all students to anonymously submit questions throughout the session
-          without hesitation.
-        </p>
-        <div className="overflow-x-auto">
-          <div className="flex gap-6 w-max">
-            {/* Example testimonial image */}
-            <div className="min-w-[300px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="resource1.png"
-                alt="resource 1"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[100px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="resource2.png"
-                alt="resource 2"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[100px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="resource3.png"
-                alt="resource 3"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[100px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="resource4.png"
-                alt="resource 4"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[100px] h-[350px] border border-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
-              <img
-                src="resource5.png"
-                alt="resource 5"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-            <div className="min-w-[300px] h-auto border border-gray-700 rounded-lg overflow-hidden">
-              <img
-                src="resource6.jpg"
-                alt="resource 6"
-                className="w-full h-auto object-contain"
-              />
-            </div>
-            {/* Add more images as needed */}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-32 px-6 md:px-32 bg-black text-white" id="faq">
-        <h2 className="text-4xl font-semibold mb-6">
-          Frequently Asked Questions
+        <h2 className="text-5xl md:text-6xl font-extrabold text-center text-blue-900 tracking-tight">
+          Choose Confidence.
+          <br />
+          <span className="block mt-5 text-blue-600">
+            Experience Excellence.
+          </span>
         </h2>
-        <div className="space-y-4">
+        <p className="text-lg leading-relaxed text-black mt-10">
+          At EZA, we place{" "}
+          <strong className="text-blue-700">
+            our students at the center of everything we do
+          </strong>
+          — every lesson, resource, and approach is tailored to meet their
+          unique needs.
+          <strong className="text-blue-700">
+            With over 7 years of tutoring experience
+          </strong>{" "}
+          in Biology, Chemistry, and Math across the{" "}
+          <strong className="text-blue-700">
+            O-Level, A-Level, and IB syllabi
+          </strong>
+          , we’ve helped students not only improve their grades but also gain
+          the confidence to tackle challenging questions independently.
+        </p>
+
+        <p className="text-lg leading-relaxed text-black py-10">
+          What sets EZA apart is a flexible hybrid model to suit diverse
+          learning preferences:{" "}
+          <strong className="text-blue-700">small group online sessions</strong>{" "}
+          to ensure interaction and engagement, and one-on-one in-person lessons
+          for highly customized support. As a tutor, we bring the qualities that
+          matter most: patience and empathy to guide students at their own pace,
+          clarity and structure to break down complex topics simply,
+          adaptability to adjust methods to different learning styles,
+          responsiveness to provide timely help and feedback, and{" "}
+          <strong className="text-blue-700">reliability </strong>
+          and <strong className="text-blue-700">consistency</strong> to ensure
+          steady progress over time.
+        </p>
+      </motion.section>
+
+      <motion.section
+        className="py-32 px-6 md:px-32 bg-gradient-to-b from-white via-blue-300 to-white"
+        id="experience"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-5xl md:text-6xl font-extrabold text-center text-blue-900 tracking-tight">
+          Real Messages.
+          <br />
+          <span className="block mt-5 text-blue-600">Real Results.</span>
+        </h2>
+        <p className="text-xl md:text-2xl text-center text-gray-600 mt-4 font-light max-w-3xl mx-auto mt-10">
+          Celebrating every win, one student at a time. Hear it from students
+          and parents who’ve seen results.
+        </p>
+        <div className="overflow-x-auto mt-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            variants={{
+              visible: {
+                transition: { staggerChildren: 0.15 },
+              },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center"
+          >
+            {cards.map((card, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
+                <div className="rounded-2xl border border-gray-200 bg-white shadow-md hover:shadow-lg transition-all duration-300 max-w-[280px] max-h-[350px] overflow-hidden">
+                  <img
+                    src={card.imgSrc}
+                    alt={card.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        className="py-32 px-6 md:px-32 bg-gradient-to-b from-white via-blue-300 to-white"
+        id="resource"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-5xl md:text-6xl font-extrabold text-center text-blue-900 tracking-tight">
+          Built to Support.
+          <br />
+          <span className="block mt-5 text-blue-600">Ready to Elevate.</span>
+        </h2>
+        <p className="text-lg leading-relaxed text-black py-10">
+          To support student success, we've established a{" "}
+          <strong className="text-blue-700">
+            robust academic resource platform
+          </strong>
+          , including a <strong className="text-blue-700">Google Drive</strong>{" "}
+          and a <strong className="text-blue-700">Telegram channel</strong>. The
+          Google Drive serves as a{" "}
+          <strong className="text-blue-700">central repository</strong> for
+          essential learning materials, such as{" "}
+          <strong className="text-blue-700">detailed class notes</strong>,{" "}
+          <strong className="text-blue-700">
+            practice homework with solutions
+          </strong>
+          , and a curated archive of{" "}
+          <strong className="text-blue-700">
+            past year papers with comprehensive solutions
+          </strong>
+          . Complementing this, the exclusive Telegram channel actively
+          addresses student needs by sharing{" "}
+          <strong className="text-blue-700">
+            insights on commonly encountered questions
+          </strong>{" "}
+          and <strong className="text-blue-700">common errors</strong>, thereby
+          proactively guiding students to{" "}
+          <strong className="text-blue-700">avoid pitfalls</strong> and{" "}
+          <strong className="text-blue-700">deepen their understanding</strong>.
+        </p>
+
+        <p className="text-lg leading-relaxed text-black py-5">
+          To ensure all students feel comfortable participating, our{" "}
+          <strong className="text-blue-700">online classes</strong> incorporate
+          an{" "}
+          <strong className="text-blue-700">
+            interactive Poll Everywhere platform
+          </strong>
+          , enabling all students to{" "}
+          <strong className="text-blue-700">
+            anonymously submit questions
+          </strong>{" "}
+          throughout the session{" "}
+          <strong className="text-blue-700">without hesitation</strong>.
+        </p>
+
+        {/*Photos */}
+        <div className="overflow-x-auto mt-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            variants={{
+              visible: {
+                transition: { staggerChildren: 0.15 },
+              },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center"
+          >
+            {cards1.map((card, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
+                <div className="rounded-2xl border border-gray-200 bg-white shadow-md hover:shadow-lg transition-all duration-300 max-w-[280px] max-h-[350px] overflow-hidden">
+                  <img
+                    src={card.imgSrc}
+                    alt={card.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Fees */}
+      <motion.section
+        className="py-32 px-6 md:px-32 bg-gradient-to-b from-white via-blue-300 to-white"
+        id="fees"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-5xl md:text-6xl font-extrabold text-center text-blue-900 tracking-tight">
+          Transparent Fees.
+          <br />
+          <span className="block mt-5 text-blue-600">No Surprises.</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-10">
+          {/* Box 1 */}
+          <div className="rounded-2xl shadow-lg p-6 border border-blue-200 text-center bg-blue-50 hover:shadow-xl transition">
+            <h3 className="text-xl font-semibold text-blue-600 mb-2">
+              Group (Online)
+            </h3>
+            <p className="text-sm text-gray-700 mb-4">
+              Max <strong>5</strong> students
+            </p>
+            <p className="text-3xl font-bold text-blue-700">
+              <span className="text-sm align-middle mr-1">From</span>
+              <span>$40/hr</span>
+            </p>
+          </div>
+
+          {/* Box 2 */}
+          <div className="rounded-2xl shadow-lg p-6 border border-blue-200 text-center bg-blue-50 hover:shadow-xl transition">
+            <h3 className="text-xl font-semibold text-blue-600 mb-2">
+              1-to-1 (Online)
+            </h3>
+            <p className="text-sm text-gray-700 mb-4">Flexible timing</p>
+            <p className="text-3xl font-bold text-blue-700">
+              <span className="text-sm align-middle mr-1">From</span>
+              <span>$60/hr</span>
+            </p>
+          </div>
+
+          {/* Box 3 */}
+          <div className="rounded-2xl shadow-lg p-6 border border-blue-200 text-center bg-blue-50 hover:shadow-xl transition">
+            <h3 className="text-xl font-semibold text-blue-600 mb-2">
+              1-to-1 (In-Person)
+            </h3>
+            <p className="text-sm text-gray-700 mb-4">Your home</p>
+            <p className="text-3xl font-bold text-blue-700">
+              <span className="text-sm align-middle mr-1">From</span>
+              <span>$70/hr</span>
+            </p>
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        className="py-32 px-6 md:px-32 bg-gradient-to-b from-white via-blue-300 to-white"
+        id="faq"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-5xl md:text-6xl font-extrabold text-center text-blue-900 tracking-tight">
+          Got Questions?
+          <br />
+          <span className="block mt-5 text-blue-600">We've Got Answers.</span>
+        </h2>
+        <div className="space-y-4 text-blue-600 mt-10">
           {[
             {
               question: "When will I be billed?",
@@ -297,9 +436,9 @@ export default function ResumeWebsite() {
                 "No. All classes are chargeable. However, students may choose to discontinue after the first lesson if they find it unsuitable.",
             },
             {
-              question: "What subjects do you offer?",
+              question: "What subjects do EZA offer?",
               answer:
-                "I specialize in Mathematics, Biology, and Chemistry at the O-Level, A-Level, and IB levels.",
+                "We specialize in Mathematics, Biology, and Chemistry at the O-Level, A-Level, and IB levels.",
             },
             {
               question: "How are online classes conducted?",
@@ -307,7 +446,7 @@ export default function ResumeWebsite() {
                 "Online lessons are conducted via Zoom in small groups (up to 5 students) with interactive tools like Poll Everywhere to encourage participation.",
             },
             {
-              question: "What is the class size for Group Zoom classes?",
+              question: "What is the class size for Group Online classes?",
               answer:
                 "Group classes are capped at 5 students to ensure personalised attention and meaningful interaction.",
             },
@@ -324,41 +463,47 @@ export default function ResumeWebsite() {
             {
               question: "Do you offer 1-on-1 tuition?",
               answer:
-                "Yes, I offer personalised one-on-one classes both online and in-person for students who prefer tailored support.",
+                "Yes, I offer personalised one-on-one classes both online and in-person for students who prefer tailored support. Students would still have access to the same Google Drive Repository.",
             },
             {
               question: "How do I sign up?",
               answer:
-                "You can sign up using the form linked on the website or contact me directly via WhatsApp or Telegram for a quick consultation.",
+                "You can sign up using the form linked on the website. We will reach out to you within three days.",
             },
           ].map((faq, index) => (
             <FAQItem key={index} question={faq.question} answer={faq.answer} />
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      {/* Contact Section */}
-      <section
-        className="py-32 px-6 md:px-32 bg-zinc-900 text-white"
+      {/* Get in touch */}
+      <motion.section
+        className="py-32 px-6 md:px-32 text-center bg-gradient-to-b from-white via-blue-300 to-white"
         id="contact"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
       >
-        <h2 className="text-4xl font-semibold mb-6">Get in Touch</h2>
-        <p className="text-lg mb-4 text-gray-400">
-          I’m open for either physical or virtual classes!
+        <h2 className="text-5xl md:text-6xl font-extrabold text-center text-blue-900 tracking-tight">
+          Your Query.
+          <br />
+          <span className="block mt-5 text-blue-600">Our Priority.</span>
+        </h2>
+        <p className="text-xl md:text-2xl text-center text-gray-600 mt-10 font-light max-w-3xl mx-auto mt-10">
+          In Person. Online. Your Call.
         </p>
-
-        {/* Phone number and WhatsApp icon */}
-        <div className="flex items-center gap-3 mb-4">
-          <p className="text-lg text-gray-400">+65 9146 6875</p>
+        <div className="flex justify-center items-center gap-3 mb-4 mt-5">
+          <p className="text-lg text-black">+65 9146 6875</p>
           <a
             href="https://wa.me/6591466875"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img
-              src="whatsapp-icon.png"
+              src="/logo/whatsapp-icon.png"
               alt="Chat on WhatsApp"
-              className="w-6 h-6 hover:opacity-80 transition-opacity"
+              className="w-6 h-6 hover:opacity-80 mx-auto transition-opacity"
             />
           </a>
           <a
@@ -367,24 +512,30 @@ export default function ResumeWebsite() {
             rel="noopener noreferrer"
           >
             <img
-              src="tele-icon.png"
+              src="/logo/tele-icon.png"
               alt="Chat on Telegram"
               className="w-7 h-7 hover:opacity-80 transition-opacity"
             />
           </a>
         </div>
 
+        {/* Sign Up Box */}
         <a
-          href="mailto:gordenpey@gmail.com"
-          className="text-blue-400 text-xl underline hover:text-blue-600"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSf6K8KNlTXAPtp4Ax-_x8AToHITSPi1KLBung75Xlx6NNeGug/viewform?usp=header"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block mt-10 mx-auto max-w-xs"
         >
-          gordenpey@gmail.com
+          <div className="animated-gradient-bg text-white rounded-2xl px-6 py-4 text-center shadow-xl hover:bg-white hover:text-black transition-colors cursor-pointer">
+            <span className="text-xl md:text-2xl font-bold tracking-tight leading-snug">
+              Get started. Stay ahead.
+            </span>
+          </div>
         </a>
-      </section>
+      </motion.section>
 
-      {/* Footer */}
-      <footer className="text-center text-gray-500 py-6 text-sm bg-zinc-900">
-        © {new Date().getFullYear()} PYJTuition. All rights reserved.
+      <footer className="text-center text-gray-500 py-6 text-sm">
+        © {new Date().getFullYear()} EZATuition. All rights reserved. Singapore.
       </footer>
     </div>
   );

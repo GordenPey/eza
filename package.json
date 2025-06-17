@@ -1,8 +1,8 @@
 {
   "name": "resume-website",
+  "homepage": "https://GordenPey.github.io/eza",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://GordenPey.github.io/pyj",
   "dependencies": {
     "framer-motion": "^12.16.0",
     "react": "^18.2.0",
